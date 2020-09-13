@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: back
+  name: back
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: back
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: back
+    spec:
+      containers:
+      - image: sulaimanovm/quotes-back:v1
+        name: back
+        env:
+          - name: secret_login
+            valueFrom:
+              secretKeyRef:
+                name: mysecret
+                key: login
+          - name: secret_password
+            valueFrom:
+              secretKeyRef:
+                name: mysecret
+                key: password
+        ports:
+        - containerPort: 3000
+        resources: {}
+      restartPolicy: Always
+status: {}
