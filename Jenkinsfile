@@ -35,7 +35,6 @@ spec:
         sh '''
         export AWS_DEFAULT_REGION=us-east-1
         make run
-//        make fill-db
         '''
       }
     }
